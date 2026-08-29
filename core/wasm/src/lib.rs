@@ -3,6 +3,7 @@ use serde_json;
 
 mod risk;
 mod memory;
+mod policy;
 
 #[wasm_bindgen]
 pub fn version() -> String {
@@ -56,4 +57,32 @@ pub fn calculate_context_deviation(
         "context_deviation": deviation
     })
     .to_string()
+}
+
+#[wasm_bindgen]
+pub fn evaluate_policy(
+    ruleset_json: String,
+    action_type: String,
+) -> String {
+    let ruleset: policy::PolicyRuleset =
+        match serde_json::from_str(&ruleset_json) {
+            Ok(value) => value,
+            Err(error) => {
+                return serde_json::json!({
+                    "error": error.to_string()
+                })
+                .to_string();
+            }
+        };
+
+    let result =
+        policy::evaluate(&ruleset, &action_type);
+
+    serde_json::to_string(&result)
+        .unwrap_or_else(|error| {
+            serde_json::json!({
+                "error": error.to_string()
+            })
+            .to_string()
+        })
 }
