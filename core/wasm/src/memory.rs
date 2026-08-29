@@ -7,15 +7,6 @@ pub struct AgentPlan {
     pub allowed_actions: Vec<String>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MemoryState {
-    pub plan: AgentPlan,
-}
-
-pub fn create_memory(plan: AgentPlan) -> MemoryState {
-    MemoryState { plan }
-}
-
 pub fn calculate_deviation(
     plan: &AgentPlan,
     action_type: &str,
