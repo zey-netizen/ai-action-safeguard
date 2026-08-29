@@ -1,0 +1,37 @@
+name: Build WASM Core
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-wasm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          target: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack
+
+      - name: Build WASM
+        run: |
+          wasm-pack build core/wasm \
+            --target web \
+            --release
+
+      - name: Upload WASM package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-action-safeguard-wasm
+          path: core/wasm/pkg/
