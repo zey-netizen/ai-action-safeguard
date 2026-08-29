@@ -2,6 +2,7 @@ use wasm_bindgen::prelude::*;
 use serde_json;
 
 mod risk;
+mod memory;
 
 #[wasm_bindgen]
 pub fn version() -> String {
