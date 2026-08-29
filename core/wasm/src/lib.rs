@@ -10,9 +10,12 @@ pub fn version() -> String {
 }
 
 #[wasm_bindgen]
-pub fn evaluate_risk(input_json: String) -> String {
-    let input: risk::RiskInput =
-        match serde_json::from_str(&input_json) {
+pub fn calculate_context_deviation(
+    plan_json: String,
+    action_type: String,
+) -> String {
+    let plan: memory::AgentPlan =
+        match serde_json::from_str(&plan_json) {
             Ok(value) => value,
             Err(error) => {
                 return serde_json::json!({
@@ -22,11 +25,14 @@ pub fn evaluate_risk(input_json: String) -> String {
             }
         };
 
-    let result = risk::evaluate(input);
+    let deviation =
+        memory::calculate_deviation(&plan, &action_type);
 
-    serde_json::to_string(&result)
-        .unwrap_or_else(|error| {
-            serde_json::json!({
+    serde_json::json!({
+        "context_deviation": deviation
+    })
+    .to_string()
+}
                 "error": error.to_string()
             })
             .to_string()
