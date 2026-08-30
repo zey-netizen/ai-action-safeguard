@@ -1,5 +1,7 @@
 {
   "provider": "openai",
   "version": "0.1.0",
+  "updated_at": "2026-08-30",
+  "source": "",
   "rules": []
 }
