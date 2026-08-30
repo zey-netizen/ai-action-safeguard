@@ -1,7 +1,247 @@
 {
   "provider": "google",
-  "version": "0.1.0",
+  "version": "2026.08.30",
   "updated_at": "2026-08-30",
-  "source": "",
-  "rules": []
+  "source": "https://policies.google.com/terms/generative-ai/use-policy",
+  "rules": [
+    {
+      "id": "GOOGLE-CHILD-001",
+      "provider": "google",
+      "action_type": "child.sexual_exploitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Child sexual abuse or exploitation is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-TERROR-001",
+      "provider": "google",
+      "action_type": "terrorism.facilitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating violent extremism or terrorism is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-INTIMATE-001",
+      "provider": "google",
+      "action_type": "nonconsensual.intimate_imagery",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating non-consensual intimate imagery is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-SELFHARM-001",
+      "provider": "google",
+      "action_type": "self_harm.facilitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating self-harm is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-ILLEGAL-001",
+      "provider": "google",
+      "action_type": "illegal.activity",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating illegal activities or violations of law is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-REGULATED-001",
+      "provider": "google",
+      "action_type": "regulated.substance_or_good",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Facilitating access to illegal or regulated substances, goods, or services is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-PRIVACY-001",
+      "provider": "google",
+      "action_type": "privacy.intrusion",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Using personal data or biometrics without legally required consent is prohibited.",
+      "conditions": [
+        "Requires legally required consent where applicable."
+      ],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-TRACKING-001",
+      "provider": "google",
+      "action_type": "person.tracking",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Tracking or monitoring people without consent is prohibited.",
+      "conditions": [
+        "Requires consent."
+      ],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-HIGH-RISK-001",
+      "provider": "google",
+      "action_type": "high_risk.automated_decision",
+      "effect": "review",
+      "severity": "critical",
+      "reason": "Automated decisions materially affecting individual rights in high-risk domains require human supervision.",
+      "conditions": [
+        "High-risk domains include employment, healthcare, finance, legal, housing, insurance, and social welfare.",
+        "Human supervision required."
+      ],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-SPAM-001",
+      "provider": "google",
+      "action_type": "spam",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Facilitating spam is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-PHISHING-001",
+      "provider": "google",
+      "action_type": "phishing",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating phishing is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-MALWARE-001",
+      "provider": "google",
+      "action_type": "malware.creation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating malware is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-INFRASTRUCTURE-001",
+      "provider": "google",
+      "action_type": "infrastructure.disruption",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Abusing, harming, interfering with, or disrupting Google or third-party infrastructure is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-BYPASS-001",
+      "provider": "google",
+      "action_type": "safety.bypass",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Circumventing abuse protections or safety filters is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-HATE-001",
+      "provider": "google",
+      "action_type": "hate_speech",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Facilitating hate speech is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-HARASSMENT-001",
+      "provider": "google",
+      "action_type": "harassment",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Harassment, bullying, intimidation, or abuse is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-VIOLENCE-001",
+      "provider": "google",
+      "action_type": "violence.facilitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating violence or incitement of violence is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-SEXUAL-001",
+      "provider": "google",
+      "action_type": "sexually_explicit",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Sexually explicit content created for pornography or sexual gratification is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-FRAUD-001",
+      "provider": "google",
+      "action_type": "fraud.scam",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Fraud, scams, and deceptive actions are prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-IMPERSONATION-001",
+      "provider": "google",
+      "action_type": "impersonation.deceptive",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Deceptive impersonation without explicit disclosure is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-EXPERTISE-001",
+      "provider": "google",
+      "action_type": "misleading.sensitive_expertise",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Misleading claims of expertise or capability in sensitive areas are prohibited when used deceptively.",
+      "conditions": [
+        "Sensitive areas include health, finance, government services, and law."
+      ],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-DEMOCRACY-001",
+      "provider": "google",
+      "action_type": "democratic_process.deception",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Deceptive claims concerning governmental or democratic processes are prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    },
+    {
+      "id": "GOOGLE-HUMAN-PROVENANCE-001",
+      "provider": "google",
+      "action_type": "content.provenance_deception",
+      "effect": "deny",
+      "severity": "medium",
+      "reason": "Misrepresenting generated content as created solely by a human in order to deceive is prohibited.",
+      "conditions": [],
+      "source_reference": "Google Generative AI Prohibited Use Policy"
+    }
+  ]
 }
