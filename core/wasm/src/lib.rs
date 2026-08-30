@@ -80,3 +80,107 @@ pub fn evaluate_policy(
             }).to_string()
         })
 }
+
+#[wasm_bindgen]
+pub fn evaluate_action(input_json: String) -> String {
+    let input: serde_json::Value =
+        match serde_json::from_str(&input_json) {
+            Ok(value) => value,
+            Err(error) => {
+                return serde_json::json!({
+                    "allowed": false,
+                    "error": error.to_string()
+                }).to_string();
+            }
+        };
+
+    let action_type = input["action"]["type"]
+        .as_str()
+        .unwrap_or("");
+
+    let plan = &input["original_plan"];
+
+    let deviation =
+        memory::calculate_deviation_from_json(
+            plan,
+            action_type
+        );
+
+    let risk_input: risk::RiskInput =
+        match serde_json::from_value(
+            input["risk_parameters"].clone()
+        ) {
+            Ok(value) => value,
+            Err(error) => {
+                return serde_json::json!({
+                    "allowed": false,
+                    "error": error.to_string()
+                }).to_string();
+            }
+        };
+
+    let mut risk_result = risk::evaluate(risk_input);
+
+    let policy_ruleset: policy::PolicyRuleset =
+        match serde_json::from_value(
+            input["policy_ruleset"].clone()
+        ) {
+            Ok(value) => value,
+            Err(error) => {
+                return serde_json::json!({
+                    "allowed": false,
+                    "error": error.to_string()
+                }).to_string();
+            }
+        };
+
+    let policy_result =
+        policy::evaluate(
+            &policy_ruleset,
+            action_type
+        );
+
+    let deviation_score = deviation * 100.0;
+
+    risk_result.risk_score =
+        ((risk_result.risk_score * 0.75)
+        + (deviation_score * 0.25))
+        .clamp(0.0, 100.0);
+
+    risk_result.risk_level =
+        if risk_result.risk_score < 25.0 {
+            "low".to_string()
+        } else if risk_result.risk_score < 50.0 {
+            "medium".to_string()
+        } else if risk_result.risk_score < 75.0 {
+            "high".to_string()
+        } else {
+            "critical".to_string()
+        };
+
+    let allowed =
+        policy_result.allowed
+        && risk_result.risk_level != "critical";
+
+    let requires_confirmation =
+        risk_result.risk_level == "high";
+
+    let mut reasons = risk_result
+        .risk_level
+        .as_str()
+        .to_string();
+
+    if !policy_result.reasons.is_empty() {
+        reasons.push_str(": policy violation");
+    }
+
+    serde_json::json!({
+        "allowed": allowed,
+        "risk_score": risk_result.risk_score,
+        "risk_level": risk_result.risk_level,
+        "context_deviation": deviation,
+        "policy_violations": policy_result.violations,
+        "reasons": [reasons],
+        "requires_confirmation": requires_confirmation
+    }).to_string()
+}
