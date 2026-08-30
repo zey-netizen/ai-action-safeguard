@@ -77,7 +77,7 @@
       },
       "expected": {
         "allowed": false,
-        "risk_level": "critical",
+        "risk_level": "high",
         "context_deviation": 1.0
       }
     },
