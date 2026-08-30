@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "AI Action Safeguard",
+  "version": "0.1.0",
+  "description": "Independent safety layer for evaluating AI agent actions before execution.",
+  "protocol": {
+    "type": "A2A",
+    "transport": "HTTP"
+  },
+  "capabilities": [
+    {
+      "name": "risk_evaluation",
+      "description": "Evaluate the risk of an AI agent action."
+    },
+    {
+      "name": "context_deviation_detection",
+      "description": "Compare an action against the agent's original plan."
+    },
+    {
+      "name": "policy_evaluation",
+      "description": "Evaluate an action against configured policy rules."
+    }
+  ],
+  "input": {
+    "original_plan": {
+      "type": "object"
+    },
+    "action": {
+      "type": "object"
+    },
+    "risk_parameters": {
+      "type": "object"
+    },
+    "policy_ruleset": {
+      "type": "object"
+    }
+  },
+  "output": {
+    "allowed": "boolean",
+    "risk_score": "number",
+    "risk_level": "string",
+    "context_deviation": "number",
+    "policy_violations": "array",
+    "reasons": "array",
+    "requires_confirmation": "boolean"
+  }
+}
