@@ -6,11 +6,18 @@ pub struct PolicyRule {
     pub provider: String,
     pub action_type: String,
     pub effect: String,
+    pub severity: String,
     pub reason: String,
+    pub conditions: Vec<String>,
+    pub source_reference: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PolicyRuleset {
+    pub provider: String,
+    pub version: String,
+    pub updated_at: String,
+    pub source: String,
     pub rules: Vec<PolicyRule>,
 }
 
@@ -29,11 +36,20 @@ pub fn evaluate(
     let mut reasons = Vec::new();
 
     for rule in &ruleset.rules {
-        if rule.action_type == action_type
-            && rule.effect.to_lowercase() == "deny"
-        {
-            violations.push(rule.id.clone());
-            reasons.push(rule.reason.clone());
+        if rule.action_type == action_type {
+            match rule.effect.to_lowercase().as_str() {
+                "deny" => {
+                    violations.push(rule.id.clone());
+                    reasons.push(rule.reason.clone());
+                }
+
+                "review" => {
+                    violations.push(format!("REVIEW:{}", rule.id));
+                    reasons.push(rule.reason.clone());
+                }
+
+                _ => {}
+            }
         }
     }
 
@@ -51,13 +67,20 @@ mod tests {
     #[test]
     fn deny_rule_should_block_action() {
         let ruleset = PolicyRuleset {
+            provider: "test".to_string(),
+            version: "1.0.0".to_string(),
+            updated_at: "2026-08-30".to_string(),
+            source: "test".to_string(),
             rules: vec![
                 PolicyRule {
                     id: "TEST-DENY-001".to_string(),
                     provider: "test".to_string(),
                     action_type: "financial.transfer".to_string(),
                     effect: "deny".to_string(),
-                    reason: "Financial transfer is denied by policy.".to_string(),
+                    severity: "critical".to_string(),
+                    reason: "Financial transfer is denied.".to_string(),
+                    conditions: vec![],
+                    source_reference: "Test policy".to_string(),
                 }
             ],
         };
@@ -75,15 +98,22 @@ mod tests {
     }
 
     #[test]
-    fn allowed_action_should_pass() {
+    fn unrelated_action_should_pass() {
         let ruleset = PolicyRuleset {
+            provider: "test".to_string(),
+            version: "1.0.0".to_string(),
+            updated_at: "2026-08-30".to_string(),
+            source: "test".to_string(),
             rules: vec![
                 PolicyRule {
                     id: "TEST-DENY-001".to_string(),
                     provider: "test".to_string(),
                     action_type: "financial.transfer".to_string(),
                     effect: "deny".to_string(),
-                    reason: "Financial transfer is denied by policy.".to_string(),
+                    severity: "critical".to_string(),
+                    reason: "Financial transfer is denied.".to_string(),
+                    conditions: vec![],
+                    source_reference: "Test policy".to_string(),
                 }
             ],
         };
