@@ -1,7 +1,270 @@
 {
   "provider": "openai",
-  "version": "0.1.0",
+  "version": "2026.08.30",
   "updated_at": "2026-08-30",
-  "source": "",
-  "rules": []
+  "source": "https://openai.com/id-ID/policies/usage-policies/",
+  "rules": [
+    {
+      "id": "OPENAI-SAFETY-HARASSMENT-001",
+      "provider": "openai",
+      "action_type": "targeted.harassment",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Targeted threats, intimidation, harassment, or defamation are prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SAFETY-SELFHARM-001",
+      "provider": "openai",
+      "action_type": "self_harm.facilitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facilitating suicide, self-harm, or eating disorders is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SAFETY-SEXUAL-001",
+      "provider": "openai",
+      "action_type": "sexual.violence",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Sexual violence or non-consensual intimate content is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SAFETY-TERROR-001",
+      "provider": "openai",
+      "action_type": "terrorism.facilitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Terrorism and violent extremist activity is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SAFETY-WEAPON-001",
+      "provider": "openai",
+      "action_type": "weapons.development",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Development, procurement, or use of conventional or CBRNE weapons is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SAFETY-PROHIBITED-GOODS-001",
+      "provider": "openai",
+      "action_type": "prohibited_goods",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Activities, goods, or services prohibited by policy may not be facilitated.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-CYBER-001",
+      "provider": "openai",
+      "action_type": "malicious.cyber",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Malicious or harmful compromise, destruction, or disruption of systems or property is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SECURITY-TEST-001",
+      "provider": "openai",
+      "action_type": "security.testing",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Security testing without authorization or request is prohibited.",
+      "conditions": [
+        "Requires explicit authorization from the system owner."
+      ],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-SAFETY-BYPASS-001",
+      "provider": "openai",
+      "action_type": "safety.bypass",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Attempting to circumvent OpenAI safety systems is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-PRIVACY-001",
+      "provider": "openai",
+      "action_type": "privacy.intrusion",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Collecting, monitoring, profiling, or distributing personal or sensitive information without permission is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-BIOMETRIC-001",
+      "provider": "openai",
+      "action_type": "biometric.face_database",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Facial-recognition databases without consent are prohibited.",
+      "conditions": [
+        "Requires consent from the data subject."
+      ],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-BIOMETRIC-002",
+      "provider": "openai",
+      "action_type": "biometric.remote_identification",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Real-time remote biometric identification in public spaces is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-IDENTITY-001",
+      "provider": "openai",
+      "action_type": "identity.likeness_without_consent",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Using a person's likeness or voice without consent in a way that can confuse identity is prohibited.",
+      "conditions": [
+        "Requires consent from the person represented."
+      ],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-PROFILING-001",
+      "provider": "openai",
+      "action_type": "social_profiling",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Social scoring, profiling, or inference of sensitive attributes from personal or biometric data is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-EMOTION-001",
+      "provider": "openai",
+      "action_type": "emotion.inference_workplace",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Inferring emotions in workplace or education settings is prohibited except for specified medical or safety purposes.",
+      "conditions": [
+        "Possible exception for medical or safety purposes."
+      ],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-CRIMINAL-RISK-001",
+      "provider": "openai",
+      "action_type": "criminal.risk_prediction",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Predicting criminal risk based only on personal characteristics or profiling is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Respect privacy"
+    },
+    {
+      "id": "OPENAI-GAMBLING-001",
+      "provider": "openai",
+      "action_type": "real_money.gambling",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Real-money gambling is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-PROFESSIONAL-001",
+      "provider": "openai",
+      "action_type": "licensed.professional_advice",
+      "effect": "review",
+      "severity": "high",
+      "reason": "Specialized legal or medical advice requires appropriate licensed professional involvement.",
+      "conditions": [
+        "Requires qualified licensed professional involvement."
+      ],
+      "source_reference": "OpenAI Usage Policies - Protect people"
+    },
+    {
+      "id": "OPENAI-ACADEMIC-001",
+      "provider": "openai",
+      "action_type": "academic.cheating",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Academic cheating is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Empower people"
+    },
+    {
+      "id": "OPENAI-DECEPTION-001",
+      "provider": "openai",
+      "action_type": "fraud.scam",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Fraud, scams, spam, or impersonation are prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Empower people"
+    },
+    {
+      "id": "OPENAI-POLITICAL-001",
+      "provider": "openai",
+      "action_type": "political.campaigning",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Political campaigning, lobbying, election interference, or demobilization activities are prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Empower people"
+    },
+    {
+      "id": "OPENAI-HIGH-IMPACT-001",
+      "provider": "openai",
+      "action_type": "high_impact.automated_decision",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Automated high-impact decisions in sensitive domains without human review are prohibited.",
+      "conditions": [
+        "Sensitive domains include employment, housing, education, finance, insurance, legal, medicine, government services, law enforcement, migration, critical infrastructure, and national security."
+      ],
+      "source_reference": "OpenAI Usage Policies - Empower people"
+    },
+    {
+      "id": "OPENAI-CHILD-CSAM-001",
+      "provider": "openai",
+      "action_type": "child.sexual_exploitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Child sexual abuse material and sexual exploitation of minors are prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect minors"
+    },
+    {
+      "id": "OPENAI-CHILD-GROOMING-001",
+      "provider": "openai",
+      "action_type": "child.grooming",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Grooming minors is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect minors"
+    },
+    {
+      "id": "OPENAI-CHILD-AGE-RESTRICTED-001",
+      "provider": "openai",
+      "action_type": "child.age_restricted_goods",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Facilitating access by minors to age-restricted goods or activities is prohibited.",
+      "conditions": [],
+      "source_reference": "OpenAI Usage Policies - Protect minors"
+    }
+  ]
 }
