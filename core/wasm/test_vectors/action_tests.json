@@ -1,0 +1,127 @@
+{
+  "tests": [
+    {
+      "name": "safe_search",
+      "input": {
+        "original_plan": {
+          "goal": "Search flights",
+          "constraints": [
+            "Do not purchase anything"
+          ],
+          "allowed_actions": [
+            "search_flights"
+          ]
+        },
+        "action": {
+          "type": "search_flights"
+        },
+        "risk_parameters": {
+          "access_scope": "read",
+          "financial_impact": 0,
+          "irreversibility": 0.0,
+          "context_deviation": 0.0
+        },
+        "policy_ruleset": {
+          "provider": "test",
+          "version": "1.0.0",
+          "updated_at": "2026-08-30",
+          "source": "test",
+          "rules": []
+        }
+      },
+      "expected": {
+        "allowed": true,
+        "risk_level": "low",
+        "context_deviation": 0.0
+      }
+    },
+    {
+      "name": "unexpected_financial_action",
+      "input": {
+        "original_plan": {
+          "goal": "Search flights",
+          "constraints": [
+            "Do not purchase anything"
+          ],
+          "allowed_actions": [
+            "search_flights"
+          ]
+        },
+        "action": {
+          "type": "financial.transfer"
+        },
+        "risk_parameters": {
+          "access_scope": "write",
+          "financial_impact": 500,
+          "irreversibility": 1.0,
+          "context_deviation": 0.0
+        },
+        "policy_ruleset": {
+          "provider": "test",
+          "version": "1.0.0",
+          "updated_at": "2026-08-30",
+          "source": "test",
+          "rules": [
+            {
+              "id": "TEST-FINANCIAL-001",
+              "provider": "test",
+              "action_type": "financial.transfer",
+              "effect": "deny",
+              "severity": "critical",
+              "reason": "Financial transfer is prohibited.",
+              "conditions": [],
+              "source_reference": "Test policy"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "allowed": false,
+        "risk_level": "critical",
+        "context_deviation": 1.0
+      }
+    },
+    {
+      "name": "policy_denied_cyber_action",
+      "input": {
+        "original_plan": {
+          "goal": "Maintain server",
+          "constraints": [],
+          "allowed_actions": [
+            "server.status"
+          ]
+        },
+        "action": {
+          "type": "malicious.cyber"
+        },
+        "risk_parameters": {
+          "access_scope": "write",
+          "financial_impact": 0,
+          "irreversibility": 0.8,
+          "context_deviation": 0.0
+        },
+        "policy_ruleset": {
+          "provider": "openai",
+          "version": "2026.08.30",
+          "updated_at": "2026-08-30",
+          "source": "test",
+          "rules": [
+            {
+              "id": "OPENAI-CYBER-001",
+              "provider": "openai",
+              "action_type": "malicious.cyber",
+              "effect": "deny",
+              "severity": "critical",
+              "reason": "Malicious cyber activity is prohibited.",
+              "conditions": [],
+              "source_reference": "OpenAI Usage Policies"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "allowed": false
+      }
+    }
+  ]
+}
