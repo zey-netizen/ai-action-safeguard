@@ -19,6 +19,9 @@ jobs:
         with:
           target: wasm32-unknown-unknown
 
+      - name: Run Rust tests
+        run: cargo test --manifest-path core/wasm/Cargo.toml
+        
       - name: Install wasm-pack
         uses: taiki-e/install-action@v2
         with:
