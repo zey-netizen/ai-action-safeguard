@@ -21,3 +21,22 @@ pub fn calculate_deviation(
         1.0
     }
 }
+
+pub fn calculate_deviation_from_json(
+    plan: &serde_json::Value,
+    action_type: &str,
+) -> f64 {
+    let allowed_actions =
+        match plan["allowed_actions"].as_array() {
+            Some(actions) => actions,
+            None => return 1.0,
+        };
+
+    if allowed_actions.iter().any(|action| {
+        action.as_str() == Some(action_type)
+    }) {
+        0.0
+    } else {
+        1.0
+    }
+}
