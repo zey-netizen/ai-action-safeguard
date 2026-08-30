@@ -18,8 +18,7 @@ pub fn evaluate_risk(input_json: String) -> String {
             Err(error) => {
                 return serde_json::json!({
                     "error": error.to_string()
-                })
-                .to_string();
+                }).to_string();
             }
         };
 
@@ -29,8 +28,7 @@ pub fn evaluate_risk(input_json: String) -> String {
         .unwrap_or_else(|error| {
             serde_json::json!({
                 "error": error.to_string()
-            })
-            .to_string()
+            }).to_string()
         })
 }
 
@@ -45,8 +43,7 @@ pub fn calculate_context_deviation(
             Err(error) => {
                 return serde_json::json!({
                     "error": error.to_string()
-                })
-                .to_string();
+                }).to_string();
             }
         };
 
@@ -55,8 +52,7 @@ pub fn calculate_context_deviation(
 
     serde_json::json!({
         "context_deviation": deviation
-    })
-    .to_string()
+    }).to_string()
 }
 
 #[wasm_bindgen]
@@ -70,8 +66,7 @@ pub fn evaluate_policy(
             Err(error) => {
                 return serde_json::json!({
                     "error": error.to_string()
-                })
-                .to_string();
+                }).to_string();
             }
         };
 
@@ -82,7 +77,6 @@ pub fn evaluate_policy(
         .unwrap_or_else(|error| {
             serde_json::json!({
                 "error": error.to_string()
-            })
-            .to_string()
+            }).to_string()
         })
 }
