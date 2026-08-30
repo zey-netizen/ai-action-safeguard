@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Action Safeguard Policy Ruleset",
+  "type": "object",
+  "required": [
+    "provider",
+    "version",
+    "updated_at",
+    "rules"
+  ],
+  "properties": {
+    "provider": {
+      "type": "string",
+      "enum": [
+        "openai",
+        "anthropic",
+        "google"
+      ]
+    },
+    "version": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "action_type",
+          "effect",
+          "reason"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "action_type": {
+            "type": "string"
+          },
+          "effect": {
+            "type": "string",
+            "enum": [
+              "allow",
+              "deny",
+              "review"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "source_reference": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
