@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Action Safeguard Payment Verification",
+  "type": "object",
+  "properties": {
+    "valid": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "valid",
+    "status"
+  ]
+}
