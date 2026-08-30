@@ -184,3 +184,60 @@ pub fn evaluate_action(input_json: String) -> String {
         "requires_confirmation": requires_confirmation
     }).to_string()
 }
+
+fn evaluate_policy_from_json(
+    policy_json: &serde_json::Value,
+    action_type: &str,
+) -> serde_json::Value {
+    let rules = match policy_json["rules"].as_array() {
+        Some(rules) => rules,
+        None => {
+            return serde_json::json!({
+                "allowed": true,
+                "violations": [],
+                "reasons": []
+            });
+        }
+    };
+
+    let mut violations = Vec::new();
+    let mut reasons = Vec::new();
+
+    for rule in rules {
+        let rule_action = rule["action_type"]
+            .as_str()
+            .unwrap_or("");
+
+        if rule_action != action_type {
+            continue;
+        }
+
+        let effect = rule["effect"]
+            .as_str()
+            .unwrap_or("allow");
+
+        let rule_id = rule["id"]
+            .as_str()
+            .unwrap_or("UNKNOWN");
+
+        let reason = rule["reason"]
+            .as_str()
+            .unwrap_or("Policy violation.");
+
+        if effect == "deny" {
+            violations.push(rule_id.to_string());
+            reasons.push(reason.to_string());
+        }
+
+        if effect == "review" {
+            violations.push(format!("REVIEW:{}", rule_id));
+            reasons.push(reason.to_string());
+        }
+    }
+
+    serde_json::json!({
+        "allowed": violations.is_empty(),
+        "violations": violations,
+        "reasons": reasons
+    })
+}
