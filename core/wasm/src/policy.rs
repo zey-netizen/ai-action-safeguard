@@ -43,3 +43,57 @@ pub fn evaluate(
         reasons,
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn deny_rule_should_block_action() {
+        let ruleset = PolicyRuleset {
+            rules: vec![
+                PolicyRule {
+                    id: "TEST-DENY-001".to_string(),
+                    provider: "test".to_string(),
+                    action_type: "financial.transfer".to_string(),
+                    effect: "deny".to_string(),
+                    reason: "Financial transfer is denied by policy.".to_string(),
+                }
+            ],
+        };
+
+        let result = evaluate(
+            &ruleset,
+            "financial.transfer"
+        );
+
+        assert!(!result.allowed);
+        assert_eq!(
+            result.violations,
+            vec!["TEST-DENY-001"]
+        );
+    }
+
+    #[test]
+    fn allowed_action_should_pass() {
+        let ruleset = PolicyRuleset {
+            rules: vec![
+                PolicyRule {
+                    id: "TEST-DENY-001".to_string(),
+                    provider: "test".to_string(),
+                    action_type: "financial.transfer".to_string(),
+                    effect: "deny".to_string(),
+                    reason: "Financial transfer is denied by policy.".to_string(),
+                }
+            ],
+        };
+
+        let result = evaluate(
+            &ruleset,
+            "search_flights"
+        );
+
+        assert!(result.allowed);
+        assert!(result.violations.is_empty());
+    }
+}
