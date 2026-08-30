@@ -1,7 +1,182 @@
 {
   "provider": "anthropic",
-  "version": "0.1.0",
+  "version": "2026.08.30",
   "updated_at": "2026-08-30",
-  "source": "",
-  "rules": []
+  "source": "https://www.anthropic.com/news/usage-policy-update",
+  "rules": [
+    {
+      "id": "ANTHROPIC-CYBER-001",
+      "provider": "anthropic",
+      "action_type": "malicious.cyber",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Malicious computer, network, or infrastructure compromise is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy - cybersecurity and agentic use"
+    },
+    {
+      "id": "ANTHROPIC-MALWARE-001",
+      "provider": "anthropic",
+      "action_type": "malware.creation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Malware creation or malicious cyber abuse is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy - cybersecurity and agentic use"
+    },
+    {
+      "id": "ANTHROPIC-CBRN-001",
+      "provider": "anthropic",
+      "action_type": "cbRN.weapon_development",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Catastrophic biological, chemical, radiological, or nuclear misuse is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic safety policy reporting"
+    },
+    {
+      "id": "ANTHROPIC-CHILD-001",
+      "provider": "anthropic",
+      "action_type": "child.sexual_exploitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Child sexual exploitation and child sexualization are prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy / Transparency Hub"
+    },
+    {
+      "id": "ANTHROPIC-TERROR-001",
+      "provider": "anthropic",
+      "action_type": "terrorism.facilitation",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Terrorism and violent extremism are prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Transparency Hub - Policy Prohibitions"
+    },
+    {
+      "id": "ANTHROPIC-SURVEILLANCE-001",
+      "provider": "anthropic",
+      "action_type": "surveillance.unauthorized",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Restricted surveillance, tracking, and monitoring uses are prohibited.",
+      "conditions": [
+        "Appropriate analytical or back-office uses may be permitted."
+      ],
+      "source_reference": "Anthropic Usage Policy update - law enforcement use"
+    },
+    {
+      "id": "ANTHROPIC-TRACKING-001",
+      "provider": "anthropic",
+      "action_type": "person.tracking",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Restricted tracking of individuals is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy update - law enforcement use"
+    },
+    {
+      "id": "ANTHROPIC-PROFILING-001",
+      "provider": "anthropic",
+      "action_type": "person.profiling",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Restricted profiling of individuals is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy update - law enforcement use"
+    },
+    {
+      "id": "ANTHROPIC-BIOMETRIC-001",
+      "provider": "anthropic",
+      "action_type": "biometric.monitoring",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Restricted biometric monitoring is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy update - law enforcement use"
+    },
+    {
+      "id": "ANTHROPIC-ELECTION-DECEPTION-001",
+      "provider": "anthropic",
+      "action_type": "election.deceptive",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Deceptive activity targeting democratic processes is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy update - election integrity"
+    },
+    {
+      "id": "ANTHROPIC-ELECTION-DISRUPTION-001",
+      "provider": "anthropic",
+      "action_type": "election.disruption",
+      "effect": "deny",
+      "severity": "critical",
+      "reason": "Disrupting democratic or election processes is prohibited.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy update - election integrity"
+    },
+    {
+      "id": "ANTHROPIC-VOTER-TARGETING-001",
+      "provider": "anthropic",
+      "action_type": "voter.targeting",
+      "effect": "deny",
+      "severity": "high",
+      "reason": "Targeting voters in prohibited political manipulation contexts is restricted.",
+      "conditions": [],
+      "source_reference": "Anthropic Usage Policy update - election integrity"
+    },
+    {
+      "id": "ANTHROPIC-POLITICAL-001",
+      "provider": "anthropic",
+      "action_type": "political.campaigning",
+      "effect": "review",
+      "severity": "high",
+      "reason": "Political use must be evaluated against the current policy boundaries, especially where advocacy, targeting, deception, or disruption is involved.",
+      "conditions": [
+        "Political research and legitimate political discourse may be allowed.",
+        "Deceptive, disruptive, or voter-targeting use is prohibited."
+      ],
+      "source_reference": "Anthropic Usage Policy update - election integrity"
+    },
+    {
+      "id": "ANTHROPIC-HIGH-RISK-EMPLOYMENT-001",
+      "provider": "anthropic",
+      "action_type": "high_risk.employment",
+      "effect": "review",
+      "severity": "high",
+      "reason": "Consumer-facing employment use cases require additional safeguards.",
+      "conditions": [
+        "Human-in-the-loop oversight required.",
+        "AI disclosure required where applicable."
+      ],
+      "source_reference": "Anthropic High-Risk Use Case Requirements"
+    },
+    {
+      "id": "ANTHROPIC-HIGH-RISK-FINANCE-001",
+      "provider": "anthropic",
+      "action_type": "high_risk.finance",
+      "effect": "review",
+      "severity": "high",
+      "reason": "Consumer-facing financial use cases require additional safeguards.",
+      "conditions": [
+        "Human-in-the-loop oversight required.",
+        "AI disclosure required where applicable."
+      ],
+      "source_reference": "Anthropic High-Risk Use Case Requirements"
+    },
+    {
+      "id": "ANTHROPIC-HIGH-RISK-LEGAL-001",
+      "provider": "anthropic",
+      "action_type": "high_risk.legal",
+      "effect": "review",
+      "severity": "high",
+      "reason": "Consumer-facing legal use cases require additional safeguards.",
+      "conditions": [
+        "Human-in-the-loop oversight required.",
+        "AI disclosure required where applicable."
+      ],
+      "source_reference": "Anthropic High-Risk Use Case Requirements"
+    }
+  ]
 }
