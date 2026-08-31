@@ -34,8 +34,10 @@ jobs:
           --release \
           --out-dir ../../api/wasm
 
-      - name: Upload WASM package
-        uses: actions/upload-artifact@v4
-        with:
-          name: ai-action-safeguard-wasm
-          path: core/wasm/pkg/
+      - name: Install API dependencies
+        working-directory: api
+        run: npm install
+      
+      - name: Run API tests
+        working-directory: api
+        run: npm test
