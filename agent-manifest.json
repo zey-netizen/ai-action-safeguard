@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "ai-action-safeguard",
+  "version": "1.0.0",
+  "protocol_version": "1.0",
+  "description": "A machine-to-machine action safety layer for AI agents. Evaluates planned actions against context deviation, risk, and policy before execution.",
+  "capabilities": {
+    "action_evaluation": {
+      "enabled": true,
+      "description": "Evaluate an AI agent action before execution."
+    },
+    "context_deviation": {
+      "enabled": true,
+      "description": "Detect deviation between the original agent plan and the proposed action."
+    },
+    "risk_evaluation": {
+      "enabled": true,
+      "description": "Evaluate action risk including access scope, financial impact, and irreversibility."
+    },
+    "policy_evaluation": {
+      "enabled": true,
+      "description": "Evaluate actions against machine-readable policy rules."
+    },
+    "payment_verification": {
+      "enabled": true,
+      "protocol": "x402",
+      "version": "2"
+    }
+  },
+  "interfaces": {
+    "wasm_core": {
+      "type": "wasm",
+      "entrypoint": "evaluate_action"
+    },
+    "payment_verifier": {
+      "type": "http",
+      "endpoint": "/verify",
+      "method": "POST"
+    }
+  },
+  "decision_model": {
+    "allowed": "boolean",
+    "risk_level": "low|medium|high|critical",
+    "risk_score": "number",
+    "context_deviation": "number",
+    "policy_violations": "array",
+    "requires_confirmation": "boolean"
+  },
+  "security": {
+    "default_behavior": "deny_on_invalid",
+    "execution_authority": "external_agent",
+    "safeguard_position": "pre_execution"
+  },
+  "payment": {
+    "protocol": "x402",
+    "version": "2",
+    "verification_endpoint": "/verify"
+  }
+}
