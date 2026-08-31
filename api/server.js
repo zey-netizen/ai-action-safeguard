@@ -1,5 +1,5 @@
 import http from "node:http";
-import { evaluate_action } from "../core/wasm/pkg/ai_action_safeguard_core.js";
+import { evaluate_action } from "./wasm/ai_action_safeguard_core.js";
 
 const PORT = Number(process.env.PORT || 8080);
 
