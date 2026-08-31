@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Action Safeguard Agent Manifest",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "protocol_version",
+    "capabilities",
+    "interfaces"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "protocol_version": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "object"
+    },
+    "interfaces": {
+      "type": "object"
+    },
+    "decision_model": {
+      "type": "object"
+    },
+    "security": {
+      "type": "object"
+    },
+    "payment": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
