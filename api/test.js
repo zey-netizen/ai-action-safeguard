@@ -114,13 +114,14 @@ test("evaluate endpoint blocks denied policy action", async () => {
     }
   };
 
-  const response = await fetch(
-    `${SERVER_URL}/v1/evaluate`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+const response = await fetch(
+  `${SERVER_URL}/v1/evaluate`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer test-secret-key"
+    },
       body: JSON.stringify(input)
     }
   );
