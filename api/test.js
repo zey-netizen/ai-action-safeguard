@@ -1,31 +1,66 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+
+const API_DIR = path.dirname(fileURLToPath(import.meta.url));
+const SERVER_URL = "http://127.0.0.1:8080";
 
 let server;
+
+function waitForServer(url, timeout = 15000) {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+
+    const check = async () => {
+      try {
+        const response = await fetch(url);
+
+        if (response.ok) {
+          resolve();
+          return;
+        }
+      } catch {}
+
+      if (Date.now() - start >= timeout) {
+        reject(new Error("API server did not start within timeout"));
+        return;
+      }
+
+      setTimeout(check, 250);
+    };
+
+    check();
+  });
+}
 
 test.before(async () => {
   server = spawn(
     process.execPath,
     ["server.js"],
     {
-      cwd: new URL(".", import.meta.url).pathname,
-      stdio: "ignore"
+      cwd: API_DIR,
+      env: {
+        ...process.env,
+        PORT: "8080"
+      },
+      stdio: "inherit"
     }
   );
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await waitForServer(`${SERVER_URL}/health`);
 });
 
 test.after(() => {
-  if (server) {
-    server.kill();
+  if (server && !server.killed) {
+    server.kill("SIGTERM");
   }
 });
 
 test("health endpoint works", async () => {
   const response = await fetch(
-    "http://127.0.0.1:8080/health"
+    `${SERVER_URL}/health`
   );
 
   assert.equal(response.status, 200);
@@ -79,7 +114,7 @@ test("evaluate endpoint blocks denied policy action", async () => {
   };
 
   const response = await fetch(
-    "http://127.0.0.1:8080/v1/evaluate",
+    `${SERVER_URL}/v1/evaluate`,
     {
       method: "POST",
       headers: {
