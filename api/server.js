@@ -5,6 +5,7 @@ import { evaluate_action } from "./wasm/ai_action_safeguard_core.js";
 const PORT = Number(process.env.PORT || 8080);
 
 const API_KEY = process.env.AIS_API_KEY || "";
+const SERVICE_NAME = "ai-action-safeguard";
 
 function sendJson(res, status, body) {
   res.writeHead(status, {
