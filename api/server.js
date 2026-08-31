@@ -124,6 +124,9 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
+  const requestId = crypto.randomUUID();
+const startedAt = Date.now();
+
   try {
     const body = await readBody(req);
 
@@ -167,7 +170,26 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
-    return sendJson(res, 200, output);
+const response = {
+  ...output,
+  request_id: requestId
+};
+
+console.log(
+  JSON.stringify({
+    timestamp: new Date().toISOString(),
+    service: SERVICE_NAME,
+    request_id: requestId,
+    action_type: input.action.type,
+    allowed: output.allowed,
+    risk_level: output.risk_level,
+    risk_score: output.risk_score,
+    duration_ms: Date.now() - startedAt
+  })
+);
+
+return sendJson(res, 200, response);
+    
   } catch (error) {
     return sendJson(res, 500, {
       allowed: false,
