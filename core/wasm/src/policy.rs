@@ -36,19 +36,31 @@ pub fn evaluate(
     let mut reasons = Vec::new();
 
     for rule in &ruleset.rules {
-        if rule.action_type == action_type {
-            match rule.effect.to_lowercase().as_str() {
-                "deny" => {
-                    violations.push(rule.id.clone());
-                    reasons.push(rule.reason.clone());
-                }
+        if rule.action_type != action_type {
+            continue;
+        }
 
-                "review" => {
-                    violations.push(format!("REVIEW:{}", rule.id));
-                    reasons.push(rule.reason.clone());
-                }
+        let effect = rule.effect.to_lowercase();
 
-                _ => {}
+        match effect.as_str() {
+            "deny" => {
+                violations.push(rule.id.clone());
+                reasons.push(rule.reason.clone());
+            }
+
+            "review" => {
+                violations.push(format!("REVIEW:{}", rule.id));
+                reasons.push(rule.reason.clone());
+            }
+
+            "allow" => {}
+
+            _ => {
+                violations.push(format!("INVALID:{}", rule.id));
+                reasons.push(format!(
+                    "Unknown policy effect: {}",
+                    rule.effect
+                ));
             }
         }
     }
@@ -59,7 +71,6 @@ pub fn evaluate(
         reasons,
     }
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
