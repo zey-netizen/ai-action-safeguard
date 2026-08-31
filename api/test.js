@@ -133,3 +133,12 @@ const response = await fetch(
   assert.equal(body.allowed, false);
   assert.equal(body.policy_violations.length, 1);
 });
+
+assert.equal(
+  typeof body.request_id,
+  "string"
+);
+
+assert.ok(
+  body.request_id.length > 0
+);
