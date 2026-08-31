@@ -43,7 +43,8 @@ test.before(async () => {
       cwd: API_DIR,
       env: {
         ...process.env,
-        PORT: "8080"
+        PORT: "8080",
+        AIS_API_KEY: "test-secret-key"
       },
       stdio: "inherit"
     }
